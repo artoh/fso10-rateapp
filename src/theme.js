@@ -11,6 +11,10 @@ const theme = {
           background: '#ffffff',
       },
       mainBackgroud: '#e1e4e8',
+      primaryButton: {
+        background: "blue",
+        foregroud: "white"
+      }
     },
     fontSizes: {
       body: 14,
