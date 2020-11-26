@@ -14,7 +14,8 @@ const theme = {
       primaryButton: {
         background: "blue",
         foregroud: "white"
-      }
+      },
+      error : "#d73a4a"
     },
     fontSizes: {
       body: 14,
