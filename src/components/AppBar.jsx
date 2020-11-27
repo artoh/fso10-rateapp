@@ -6,6 +6,8 @@ import {Link} from 'react-router-native';
 import Text from './Text';
 import theme from '../theme';
 
+import useCurrentUser from '../hooks/useCurrentUser';
+import useSignOut from '../hooks/useSignOut';
 
 const styles = StyleSheet.create({
   container: {
@@ -28,13 +30,31 @@ const AppBarTab = (props) => {
   );
 };
 
+const SignOutTab = () => {
+  const signOut = useSignOut();
+
+  const onClick = async () => {
+    await signOut();
+  };
+
+  return(
+    <TouchableWithoutFeedback onPress={onClick}>
+      <Text style={styles.caption}>Sign out</Text>
+    </TouchableWithoutFeedback>
+  )
+}
+
 
 const AppBar = () => {
+
+  const currentUser = useCurrentUser();
+
   return (
         <View style={styles.container}>
           <ScrollView horizontal>
            <AppBarTab title="Repositories" to="/"/>
-           <AppBarTab title="Sign in" to="/sign" />         
+  { !currentUser && <AppBarTab title="Sign in" to="/sign" />  }
+  { currentUser && <SignOutTab/>} 
            </ScrollView>
         </View>    
   );
