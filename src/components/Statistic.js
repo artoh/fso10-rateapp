@@ -38,7 +38,7 @@ const Statistic = (props) => {
     return (
         <View style={styles.container}>  
             <View style={styles.count}>
-                <Text style={styles.countText}>{formatStatistic(props.count)}</Text>
+                <Text style={styles.countText} testID="StatisticValue">{formatStatistic(props.count)}</Text>
             </View>
             <View style={styles.title}>
     <Text style={styles.titleText}>{props.title}</Text>

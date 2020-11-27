@@ -59,26 +59,26 @@ const styles = StyleSheet.create({
 
 const RepositoryItem = (props) => {
     return (
-        <View style={styles.flexcontainer}>  
+        <View style={styles.flexcontainer} testID="Repository">  
             <View style={styles.caption}>
                 <Image source={{uri: props.item.ownerAvatarUrl}} style={styles.avatar}/>
                 <View style={styles.information}>                
                     <View>
-                        <Text style={styles.name}>{props.item.fullName}</Text>
+                        <Text style={styles.name} testID="RepoName">{props.item.fullName}</Text>
                     </View>
                     <View>
-                        <Text style={styles.description}>{props.item.description}</Text>                
+                        <Text style={styles.description} testID="RepoDesc">{props.item.description}</Text>                
                     </View>
-                    <View style={styles.languageContainer}>
+                    <View style={styles.languageContainer} testID="RepoLanguages">
                         <Text style={styles.language}>{props.item.language}</Text>                
                     </View>                    
                 </View>
             </View>
             <View style={styles.statistics}>
-                <Statistic title="Stars" count={props.item.stargazersCount}/>
-                <Statistic title="Forks" count={props.item.forksCount}/>
-                <Statistic title="Reviews" count={props.item.reviewCount}/>
-                <Statistic title="Rating" count={props.item.ratingAverage}/>
+                <Statistic title="Stars" testID="RepoStars"  count={props.item.stargazersCount} />
+                <Statistic title="Forks" count={props.item.forksCount} />
+                <Statistic title="Reviews" count={props.item.reviewCount} />
+                <Statistic title="Rating" count={props.item.ratingAverage} />
             </View>                        
         </View>
     );
