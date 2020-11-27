@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         padding: 8,
         fontSize: theme.fontSizes.body,
         borderStyle: "solid",
-        borderColor: "darkGray",
+        borderColor: "#cccccc",
         borderRadius: 4,
         borderWidth: 1
     }, 

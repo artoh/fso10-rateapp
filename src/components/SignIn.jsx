@@ -16,17 +16,16 @@ const initialValues = {
 
 const styles = StyleSheet.create ({
     view: {    
-        backgroundColor: "white"
+        backgroundColor: "#ffffff"
     }
 });
 
 const SignInForm = ({onSubmit}) => {
-
   return (
       <View style={styles.view}>
-          <FormikTextInput name="username" placeholder="Username" />
-          <FormikTextInput name="password" placeholder="Password" secureTextEntry />
-          <TouchableWithoutFeedback onPress={onSubmit}>
+          <FormikTextInput name="username" placeholder="Username" testID="usernameField" />
+          <FormikTextInput name="password" placeholder="Password" testID="passwordField" secureTextEntry />
+          <TouchableWithoutFeedback onPress={onSubmit} testID="submitButton">
               <Text button='primary'>Sign in</Text>
           </TouchableWithoutFeedback>
       </View>
@@ -42,7 +41,20 @@ const validationSchema = yup.object().shape({
         .required('Password is required'),
 });
 
-const SignIn = () => {    
+export const SignInContainer = ({onSubmit}) => {    
+
+    return (
+        <Formik 
+            initialValues={initialValues} 
+            onSubmit={onSubmit}
+            validationSchema={validationSchema}
+        >
+            {({handleSubmit}) => <SignInForm onSubmit={handleSubmit}/>}
+        </Formik>
+    );
+};
+
+const SignIn = () => {
     const [signIn] = useSignIn();
     const history = useHistory();
 
@@ -57,16 +69,7 @@ const SignIn = () => {
         }
         
     };
-
-    return (
-        <Formik 
-            initialValues={initialValues} 
-            onSubmit={onSubmit}
-            validationSchema={validationSchema}
-        >
-            {({handleSubmit}) => <SignInForm onSubmit={handleSubmit}/>}
-        </Formik>
-    );
+    return (<SignInContainer onSubmit={onSubmit}/>);
 };
 
 export default SignIn;
