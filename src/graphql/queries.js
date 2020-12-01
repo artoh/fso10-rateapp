@@ -11,7 +11,6 @@ query {
           language
           ratingAverage
           reviewCount
-          url
           forksCount
           ownerAvatarUrl
           stargazersCount
@@ -20,6 +19,37 @@ query {
     }
   }
 `;
+
+export const GET_REPOSITORY = gql`
+query getRepository($id: ID!) {
+    repository (id: $id) {
+          id 
+          fullName
+          description
+          language
+          ratingAverage
+          reviewCount
+          url
+          forksCount   
+          ownerAvatarUrl
+          stargazersCount
+          reviews {
+          edges {
+            node {
+              id
+              text
+              rating
+              createdAt
+              user {
+                id
+                username
+              }
+            }
+          }
+        }
+    }
+  }
+  `;
 
 export const GET_USER = gql `
 query {

@@ -1,8 +1,11 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, StyleSheet, Image, TouchableWithoutFeedback} from 'react-native';
+import Text from './Text';
 
 import theme from '../theme';
 import Statistic from './Statistic';
+
+import * as Linking from 'expo-linking';
 
 const styles = StyleSheet.create({
     flexcontainer: {
@@ -53,9 +56,32 @@ const styles = StyleSheet.create({
     statistics: {
         display: 'flex',
         flexDirection: 'row'
+    },
+    gitHubBtton: {
+        alignSelf: 'stretch',
+        padding: 18,
+        borderRadius: 4,
+        fontWeight: theme.fontWeights.bold   
+    },
+    githubView: {
+        width: '90 %'
     }
     // ...
   });
+
+const GitHubButton = (props) => {
+    const open  = () => {
+        Linking.openURL(props.url);
+    };
+
+    return (
+        <TouchableWithoutFeedback onPress={open} testID="openInGithubButton">
+            <View style={styles.githubView}>
+                <Text button="primary" style={styles.gitHubBtton}>Open in GitHub</Text>
+            </View>
+        </TouchableWithoutFeedback>
+    );
+};
 
 const RepositoryItem = (props) => {
     return (
@@ -75,11 +101,12 @@ const RepositoryItem = (props) => {
                 </View>
             </View>
             <View style={styles.statistics}>
-                <Statistic title="Stars" testID="RepoStars"  count={props.item.stargazersCount} />
+                <Statistic title="Stars" count={props.item.stargazersCount} />
                 <Statistic title="Forks" count={props.item.forksCount} />
                 <Statistic title="Reviews" count={props.item.reviewCount} />
                 <Statistic title="Rating" count={props.item.ratingAverage} />
-            </View>                        
+            </View>    
+            { props.item.url && <GitHubButton url={props.item.url}/> }                    
         </View>
     );
 };
