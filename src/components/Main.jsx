@@ -7,6 +7,7 @@ import AppBar from './AppBar';
 import RepositoryList from './RepositoryList';
 import SignIn from './SignIn';
 import SingleRepositoryView from './SingleRepositoryView';
+import CreateReview from './CreateReview'
 
 import theme from '../theme';
 
@@ -32,6 +33,9 @@ const Main = () => {
         </Route>
         <Route path="/repositories/:id" exact>
           <SingleRepositoryView/>
+        </Route>
+        <Route path="/review" exact>
+          <CreateReview/>
         </Route>
         <Redirect to="/"/>
       </Switch>      
