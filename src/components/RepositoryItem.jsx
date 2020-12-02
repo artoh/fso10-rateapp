@@ -17,19 +17,31 @@ const styles = StyleSheet.create({
     },
     caption: {
         display: 'flex',
-        flexDirection: 'row', 
+        flexDirection: 'row'   
     },
     description: {
         color: 'gray',
         marginTop: 4,
-        marginBottom: 4
+        marginBottom: 4,
+        flexWrap: 'wrap',
+        alignItems: 'flex-start',
+        flex: 1        
     },    
+    descriptionContainer: {
+        flexWrap: 'wrap',
+        justifyContent: 'flex-start',
+        flex: 1,
+        alignItems: 'flex-start'
+    },
     information : {
         margin: 10,
         display: 'flex',
         flexDirection: 'column',
         flexGrow: 1,
-        justifyContent: 'center'
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        flexWrap: 'wrap',
+        flex: 1
     },
     name: {
         fontWeight: theme.fontWeights.bold,        
@@ -92,7 +104,7 @@ const RepositoryItem = (props) => {
                     <View>
                         <Text style={styles.name} testID="RepoName">{props.item.fullName}</Text>
                     </View>
-                    <View>
+                    <View style={styles.descriptionContainer}>
                         <Text style={styles.description} testID="RepoDesc">{props.item.description}</Text>                
                     </View>
                     <View style={styles.languageContainer} testID="RepoLanguages">
