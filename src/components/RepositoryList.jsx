@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { FlatList, View, StyleSheet, TouchableOpacity } from 'react-native';
 import RepositoryItem from './RepositoryItem';
 import useRepositories from '../hooks/useRepositories';
 import { useHistory } from 'react-router-dom';
+
+import RNPickerSelect from 'react-native-picker-select';
 
 const styles = StyleSheet.create({
     separator: {
@@ -28,17 +30,35 @@ const LinkedRepositoryItem = ({item}) => {
 };
 
 
-export const RepositoryListContainer = ({repositories}) => {
+const OrderPicker = (order, setOrder) => {
+  return (
+    <RNPickerSelect
+      onValueChange={(value) => { if(value !== order) setOrder(value); }}
+      value={order}
+      items={[
+        { label: "Latest repositories", value:"latest"},
+        { label: "Highest rated repositories", value:"highest"},
+        { label: "Lowest rated repositories", value:"lowest"}
+      ]}
+      />
+  );
+};
+
+export const RepositoryListContainer = ({repositories, order, setOrder}) => {
+
   
   const repositoryNodes = repositories
     ? repositories.edges.map(edge => edge.node)
     : [];
+    
+  console.log("Order in listContainer ", order);
 
-  return (
+  return (    
     <FlatList
       testID="RepositoriesContainer"
       data={repositoryNodes}
       ItemSeparatorComponent={ItemSeparator}
+      ListHeaderComponent={OrderPicker(order, setOrder)}
       renderItem={({item}) => (          
           <LinkedRepositoryItem item={item}/>
         )}
@@ -48,9 +68,12 @@ export const RepositoryListContainer = ({repositories}) => {
 };
   
 const RepositoryList = () => {
-  const { repositories } = useRepositories();
+  const [order, setOrder] = useState("latest");
+  const repositories = useRepositories(order);
+
+  console.log("Order in list", order);
   
-  return <RepositoryListContainer repositories={repositories}/>;
+  return <RepositoryListContainer repositories={repositories} order={order} setOrder={setOrder}/>;
 };
 
 
