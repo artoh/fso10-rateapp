@@ -9,6 +9,7 @@ import SignIn from './SignIn';
 import SingleRepositoryView from './SingleRepositoryView';
 import CreateReview from './CreateReview';
 import SignUp from './SignUp';
+import MyReviewList from './MyReviewList';
 
 import theme from '../theme';
 
@@ -40,6 +41,9 @@ const Main = () => {
         </Route>
         <Route path="/review" exact>
           <CreateReview/>
+        </Route>
+        <Route path="/myreviews" exact>
+          <MyReviewList/>
         </Route>
         <Redirect to="/"/>
       </Switch>      

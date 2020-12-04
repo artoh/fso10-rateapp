@@ -92,15 +92,21 @@ export class RepositoryListContainer extends React.Component {
     ? this.props.repositories.edges.map(edge => edge.node)
     : [];
 
+    const props = this.props;    
+    console.log(props)
+
     return (    
       <FlatList
         testID="RepositoriesContainer"
-        data={repositoryNodes}
+        data={repositoryNodes}        
         ItemSeparatorComponent={ItemSeparator}
         ListHeaderComponent={this.renderHeader}
         renderItem={({item}) => (          
             <LinkedRepositoryItem item={item}/>
           )}
+        keyExtractor={(item) => item.id}
+        onEndReached={props.onEndReach}
+        onEndReachedThreshold={0.8}
       />
     );    
   }
@@ -112,11 +118,24 @@ const RepositoryList = () => {
   const [filter, setFilter] = useState("");
   const [delayedFilter] = useDebounce(filter, 200);
 
-  const repositories = useRepositories(order, delayedFilter);
+  const { repositories, fetchMore } = useRepositories(order, delayedFilter);
+
+  const onEndReach = () => {
+    console.log("End reached");
+    fetchMore();
+  };
 
   console.log("Order in list", order);
   
-  return <RepositoryListContainer repositories={repositories} order={order} setOrder={setOrder} filter={filter} setFilter={setFilter}/>;
+  return (
+    <RepositoryListContainer 
+      repositories={repositories} 
+      order={order} 
+      setOrder={setOrder} 
+      filter={filter} 
+      setFilter={setFilter}
+      onEndReach={onEndReach}
+    />);
 };
 
 

@@ -26,7 +26,16 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.primaryButton.background,
     color: theme.colors.primaryButton.foregroud,
     textAlign: 'center',
-    padding: 8,
+    padding: 18,
+    borderRadius: 4,
+    margin: 16
+  },
+  dangerButton : {
+    backgroundColor: theme.colors.error,
+    color: theme.colors.primaryButton.foregroud,
+    textAlign: 'center',
+    padding: 18,
+    borderRadius: 4,
     margin: 16
   }
 });
@@ -39,6 +48,7 @@ const Text = ({ color, fontSize, fontWeight, style, button, ...props }) => {
     fontSize === 'subheading' && styles.fontSizeSubheading,
     fontWeight === 'bold' && styles.fontWeightBold,
     button === 'primary' && styles.primaryButton,
+    button === 'danger' && styles.dangerButton,
     style,
   ];
 

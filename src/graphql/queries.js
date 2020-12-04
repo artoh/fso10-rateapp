@@ -4,12 +4,16 @@ export const GET_REPOSITORIES = gql`
 query getRepositories(
     $orderDirection: OrderDirection,
     $orderBy: AllRepositoriesOrderBy,
-    $search: String
+    $search: String,
+    $after: String,
+    $first: Int
 ) {
     repositories(
         orderBy: $orderBy,
         orderDirection: $orderDirection,
-        searchKeyword:  $search
+        searchKeyword:  $search,
+        first: $first,
+        after: $after
     ) { 
       edges {
         node {
@@ -22,7 +26,14 @@ query getRepositories(
           forksCount
           ownerAvatarUrl
           stargazersCount
-        }
+        }  
+        cursor      
+      }
+      pageInfo {
+        endCursor
+        startCursor
+        totalCount
+        hasNextPage
       }
     }
   }
@@ -42,28 +53,42 @@ query getRepository($id: ID!) {
           ownerAvatarUrl
           stargazersCount
           reviews {
-          edges {
-            node {
-              id
-              text
-              rating
-              createdAt
-              user {
+            edges {
+                node {
                 id
-                username
-              }
+                text
+                rating
+                createdAt
+                user {
+                    id
+                    username
+                  }
+                }
             }
-          }
         }
     }
   }
   `;
 
 export const GET_USER = gql `
-query {
+query getAuthorizedUser($includeReviews: Boolean = false) {
     authorizedUser {
         id
         username
+        reviews @include(if: $includeReviews) {
+            edges {
+                node {
+                  id
+                    repository {
+                        fullName
+                        url
+                    }          
+                  rating
+                  createdAt
+                  text                  
+              }
+            }
+        }
     }
 }
 `;
