@@ -93,7 +93,6 @@ export class RepositoryListContainer extends React.Component {
     : [];
 
     const props = this.props;    
-    console.log(props)
 
     return (    
       <FlatList
