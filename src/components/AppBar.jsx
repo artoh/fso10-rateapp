@@ -47,7 +47,8 @@ const SignOutTab = () => {
 
 const AppBar = () => {
 
-  const currentUser = useCurrentUser();
+  const userData = useCurrentUser();
+  const currentUser = userData && userData.data;
 
   return (
         <View style={styles.container}>
