@@ -47,18 +47,18 @@ const SignOutTab = () => {
 
 const AppBar = () => {
 
-  const userData = useCurrentUser();
-  const currentUser = userData && userData.data;
+  const currentUserData = useCurrentUser();
+  const isLogged = currentUserData && currentUserData.data;
 
   return (
         <View style={styles.container}>
           <ScrollView horizontal>
            <AppBarTab title="Repositories" to="/"/>
-           { currentUser && <AppBarTab title="Create a review" to="/review" />}           
-           { currentUser && <AppBarTab title="My reviews" to="/myreviews" />}
-  { !currentUser && <AppBarTab title="Sign in" to="/sign" />  }
-  { !currentUser && <AppBarTab title="Sign up" to="/signup" />}
-  { currentUser && <SignOutTab/>} 
+           { isLogged && <AppBarTab title="Create a review" to="/review" />}           
+           { isLogged && <AppBarTab title="My reviews" to="/myreviews" />}
+  { !isLogged && <AppBarTab title="Sign in" to="/sign" />  }
+  { !isLogged && <AppBarTab title="Sign up" to="/signup" />}
+  { isLogged && <SignOutTab/>} 
            </ScrollView>
         </View>    
   );
