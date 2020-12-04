@@ -13,7 +13,7 @@ const SingleRepositoryView = () => {
     const { repository, loading } = useRepository(id);
 
     if(loading)
-        return ;
+        return null;
 
     return (
         <FlatList 

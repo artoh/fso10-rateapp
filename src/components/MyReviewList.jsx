@@ -18,9 +18,9 @@ const MyReviewsListContainer = ({reviews, refetch}) => {
 
 const MyReviewList = () => {
     const user = useCurrentUser(true);    
-    console.log(user)
-    const reviews = user ? user.data.reviews.edges.map(edges => edges.node) : [];        
-    const refetch = user ? user.refetch : null;    
+    
+    const reviews = user && user.data ? user.data.reviews.edges.map(edges => edges.node) : [];        
+    const refetch = user && user.data ? user.refetch : null;    
 
     return (
         <MyReviewsListContainer reviews={reviews} refetch={refetch} />

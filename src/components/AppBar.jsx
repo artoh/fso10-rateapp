@@ -9,6 +9,8 @@ import theme from '../theme';
 import useCurrentUser from '../hooks/useCurrentUser';
 import useSignOut from '../hooks/useSignOut';
 
+import { useHistory } from 'react-router-dom';
+
 const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
@@ -32,9 +34,11 @@ const AppBarTab = (props) => {
 
 const SignOutTab = () => {
   const signOut = useSignOut();
+  const history = useHistory();
 
   const onClick = async () => {
     await signOut();
+    history.push("/");
   };
 
   return(
