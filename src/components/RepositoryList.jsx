@@ -70,10 +70,10 @@ const OrderPicker = ({order, setOrder}) => {
 
 const RepositoryListHeader = ({order, setOrder, filter, setFilter}) => {  
   return (
-    <div>      
+    <View>      
       <RepositorySearch filter={filter} setFilter={setFilter}/>
       <OrderPicker order={order} setOrder={setOrder}/>
-    </div>
+    </View>
   );
 };
 
